@@ -4,7 +4,7 @@ Go package to implement the whosonfirst/go-whosonfirst-spr interface for "standa
 
 ## Description
 
-`go-whosonfirst-sqlite-spr` is a Go package to implement the whosonfirst/go-whosonfirst-spr interface for ["standard places result"](https://github.com/whosonfirst/go-whosonfirst-spr) (SPR) data stored in a SQLite database, specifically data stored in [an `spr` table](https://github.com/whosonfirst/go-whosonfirst-sqlite-features#spr) as indexed by the `go-whosonfirst-sqlite-features` package.
+`go-whosonfirst-sqlite-spr` is a Go package to implement the `whosonfirst/go-whosonfirst-spr` interface for ["standard places result"](https://github.com/whosonfirst/go-whosonfirst-spr) (SPR) data stored in a SQLite database, specifically data stored in [an `spr` table](https://github.com/whosonfirst/go-whosonfirst-sqlite-features#spr) as indexed by the `go-whosonfirst-sqlite-features` package.
 
 This package exposes a single public method called `RetrieveSPR` that retrieves a row from a `spr` table in a SQLite database and returns it as an instance that implements the `go-whosonfirst-spr.SPR` interface. 
 

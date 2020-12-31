@@ -41,7 +41,7 @@ The `spr_r` instance returned will have the type `SQLiteStandardPlacesResult` an
 
 ```
 type SQLiteStandardPlacesResult struct {
-	spr.StandardPlacesResult `json:",omitempty"`
+	spr.StandardPlacesResult     `json:",omitempty"`
 	WOFId                        string  `json:"wof:id"`
 	WOFParentId                  string  `json:"wof:parent_id"`
 	WOFName                      string  `json:"wof:name"`

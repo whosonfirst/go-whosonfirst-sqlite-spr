@@ -1,6 +1,6 @@
 # go-whosonfirst-sqlite-spr
 
-Go package to implement the whosonfirst/go-whosonfirst-spr interface for "standard places result" (SPR) data stored in a SQLite database.
+Go package to implement the `whosonfirst/go-whosonfirst-spr` interface for "standard places result" (SPR) data stored in a SQLite database.
 
 ## Description
 

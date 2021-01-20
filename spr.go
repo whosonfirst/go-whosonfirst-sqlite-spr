@@ -3,9 +3,10 @@ package spr
 import (
 	"context"
 	"fmt"
+	"github.com/sfomuseum/go-edtf"
 	"github.com/whosonfirst/go-whosonfirst-flags"
 	"github.com/whosonfirst/go-whosonfirst-flags/existential"
-	wof_spr "github.com/whosonfirst/go-whosonfirst-spr"
+	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
 	wof_sqlite "github.com/whosonfirst/go-whosonfirst-sqlite"
 	wof_database "github.com/whosonfirst/go-whosonfirst-sqlite/database"
 	"github.com/whosonfirst/go-whosonfirst-uri"
@@ -38,8 +39,10 @@ type SQLiteStandardPlacesResult struct {
 	MZIsCeased                   int64   `json:"mz:is_ceased"`
 	MZIsSuperseded               int64   `json:"mz:is_superseded"`
 	MZIsSuperseding              int64   `json:"mz:is_superseding"`
+	EDTFInception                string  `json:"edtf:inception"`
+	EDTFCessation                string  `json:"edtf:cessation"`
 
-	// supersedes and superseding need to be added here pending
+	// supersedes and superseding and belongs need to be added here pending
 	// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/14
 
 	WOFPath         string `json:"wof:path"`
@@ -119,6 +122,18 @@ func (spr *SQLiteStandardPlacesResult) IsSuperseded() flags.ExistentialFlag {
 	return existentialFlag(spr.MZIsSuperseded)
 }
 
+// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/18
+
+func (spr *SQLiteStandardPlacesResult) Inception() *edtf.EDTFDate {
+	return nil
+}
+
+// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/18
+
+func (spr *SQLiteStandardPlacesResult) Cessation() *edtf.EDTFDate {
+	return nil
+}
+
 func (spr *SQLiteStandardPlacesResult) IsSuperseding() flags.ExistentialFlag {
 	return existentialFlag(spr.MZIsSuperseding)
 }
@@ -132,6 +147,12 @@ func (spr *SQLiteStandardPlacesResult) SupersededBy() []int64 {
 // https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/14
 
 func (spr *SQLiteStandardPlacesResult) Supersedes() []int64 {
+	return []int64{}
+}
+
+// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/14
+
+func (spr *SQLiteStandardPlacesResult) BelongsTo() []int64 {
 	return []int64{}
 }
 
@@ -158,6 +179,7 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 	spr_q := fmt.Sprintf(`SELECT 
 		id, parent_id, name, placetype,
 		country, repo,
+		inception, cessation,
 		latitude, longitude,
 		min_latitude, min_longitude,
 		max_latitude, max_longitude,
@@ -175,6 +197,9 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 	var country string
 	var repo string
 
+	var inception string
+	var cessation string
+
 	var latitude float64
 	var longitude float64
 	var min_latitude float64
@@ -188,7 +213,7 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 	var is_superseded int64
 	var is_superseding int64
 
-	// supersedes and superseding need to be added here pending
+	// supersedes and superseding and belongsto need to be added here pending
 	// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/14
 
 	var lastmodified int64
@@ -198,6 +223,7 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 
 	err = row.Scan(
 		&spr_id, &parent_id, &name, &placetype, &country, &repo,
+		&inception, &cessation,
 		&latitude, &longitude, &min_latitude, &max_latitude, &min_longitude, &max_longitude,
 		&is_current, &is_deprecated, &is_ceased, &is_superseded, &is_superseding,
 		&lastmodified,
@@ -235,6 +261,8 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 		WOFPath:         path,
 		WOFRepo:         repo,
 		WOFLastModified: lastmodified,
+		EDTFInception:   inception,
+		EDTFCessation:   cessation,
 	}
 
 	return s, nil

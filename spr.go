@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/sfomuseum/go-edtf"
+	"github.com/sfomuseum/go-edtf/parser"
 	"github.com/whosonfirst/go-whosonfirst-flags"
 	"github.com/whosonfirst/go-whosonfirst-flags/existential"
 	wof_spr "github.com/whosonfirst/go-whosonfirst-spr/v2"
@@ -122,16 +123,26 @@ func (spr *SQLiteStandardPlacesResult) IsSuperseded() flags.ExistentialFlag {
 	return existentialFlag(spr.MZIsSuperseded)
 }
 
-// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/18
-
 func (spr *SQLiteStandardPlacesResult) Inception() *edtf.EDTFDate {
-	return nil
+
+	d, err := parser.ParseString(spr.EDTFInception)
+
+	if err != nil {
+		return nil
+	}
+
+	return d
 }
 
-// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/18
-
 func (spr *SQLiteStandardPlacesResult) Cessation() *edtf.EDTFDate {
-	return nil
+
+	d, err := parser.ParseString(spr.EDTFCessation)
+
+	if err != nil {
+		return nil
+	}
+
+	return d
 }
 
 func (spr *SQLiteStandardPlacesResult) IsSuperseding() flags.ExistentialFlag {
@@ -234,6 +245,18 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 	}
 
 	path, err := uri.Id2RelPath(id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = parser.ParseString(inception)
+
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = parser.ParseString(cessation)
 
 	if err != nil {
 		return nil, err

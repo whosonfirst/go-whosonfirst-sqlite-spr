@@ -279,7 +279,7 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 		MZIsCeased:      is_ceased,
 		MZIsSuperseded:  is_superseded,
 		MZIsSuperseding: is_superseding,
-		// supersedes and superseding go here pending
+		// supersedes and superseding and belongsto go here pending
 		// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/14
 		WOFPath:         path,
 		WOFRepo:         repo,

@@ -2,6 +2,7 @@ package spr
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"github.com/sfomuseum/go-edtf"
 	"github.com/sfomuseum/go-edtf/parser"
@@ -198,6 +199,11 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 
 	row := conn.QueryRowContext(ctx, spr_q, args...)
 
+	return RetrieveSPRWithRow(ctx, row)
+}
+
+func RetrieveSPRWithRow(ctx context.Context, row *sql.Row) (wof_spr.StandardPlacesResult, error) {
+
 	var spr_id string
 	var parent_id string
 	var name string
@@ -233,7 +239,7 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 	// supersedes and superseding need to be added here pending
 	// https://github.com/whosonfirst/go-whosonfirst-sqlite-features/issues/14
 
-	err = row.Scan(
+	err := row.Scan(
 		&spr_id, &parent_id, &name, &placetype, &country, &repo,
 		&inception, &cessation,
 		&latitude, &longitude, &min_latitude, &max_latitude, &min_longitude, &max_longitude,
@@ -241,6 +247,12 @@ func RetrieveSPR(ctx context.Context, spr_db *wof_database.SQLiteDatabase, spr_t
 		&str_supersedes, &str_superseded_by, &str_belongs_to,
 		&lastmodified,
 	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	id, err := strconv.ParseInt(spr_id, 10, 64)
 
 	if err != nil {
 		return nil, err

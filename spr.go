@@ -257,6 +257,9 @@ func retrieveSPRWithScanner(ctx context.Context, scanner interface{}) (wof_spr.S
 	var str_superseded_by string
 	var str_belongs_to string
 
+	var is_alt int64
+	var alt_label string
+
 	var lastmodified int64
 
 	// supersedes and superseding need to be added here pending
@@ -268,22 +271,28 @@ func retrieveSPRWithScanner(ctx context.Context, scanner interface{}) (wof_spr.S
 	case *sql.Rows:
 
 		scanner_err = scanner.(*sql.Rows).Scan(
-			&spr_id, &parent_id, &name, &placetype, &country, &repo,
+			&spr_id, &parent_id, &name, &placetype,
 			&inception, &cessation,
-			&latitude, &longitude, &min_latitude, &max_latitude, &min_longitude, &max_longitude,
+			&country, &repo,
+			&latitude, &longitude,
+			&min_latitude, &max_latitude, &min_longitude, &max_longitude,
 			&is_current, &is_deprecated, &is_ceased, &is_superseded, &is_superseding,
 			&str_supersedes, &str_superseded_by, &str_belongs_to,
+			&is_alt, &alt_label,
 			&lastmodified,
 		)
 
 	default:
 
 		scanner_err = scanner.(*sql.Rows).Scan(
-			&spr_id, &parent_id, &name, &placetype, &country, &repo,
+			&spr_id, &parent_id, &name, &placetype,
 			&inception, &cessation,
-			&latitude, &longitude, &min_latitude, &max_latitude, &min_longitude, &max_longitude,
+			&country, &repo,
+			&latitude, &longitude,
+			&min_latitude, &max_latitude, &min_longitude, &max_longitude,
 			&is_current, &is_deprecated, &is_ceased, &is_superseded, &is_superseding,
 			&str_supersedes, &str_superseded_by, &str_belongs_to,
+			&is_alt, &alt_label,
 			&lastmodified,
 		)
 	}

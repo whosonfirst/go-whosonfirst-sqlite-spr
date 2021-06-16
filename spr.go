@@ -284,7 +284,7 @@ func retrieveSPRWithScanner(ctx context.Context, scanner interface{}) (wof_spr.S
 
 	default:
 
-		scanner_err = scanner.(*sql.Rows).Scan(
+		scanner_err = scanner.(*sql.Row).Scan(
 			&spr_id, &parent_id, &name, &placetype,
 			&inception, &cessation,
 			&country, &repo,

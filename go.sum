@@ -1,4 +1,8 @@
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
+github.com/aaronland/go-pagination v0.0.3 h1:MhD+sl0L4M0mJ0zDnk/njpGqowwG9dhda/5wfm5dU0M=
+github.com/aaronland/go-pagination v0.0.3/go.mod h1:AWtlmw9OwbSPP6cSY6wRZzfYVTwXMpB+xU+2ohNLPAE=
+github.com/aaronland/go-pagination-sql v0.0.4 h1:B3y1LKp6EjYzMehlwgwkn8uOsUOOEXqsHbqlhsfvfao=
+github.com/aaronland/go-pagination-sql v0.0.4/go.mod h1:Bb4b3VM6yRBo8+EHixDUOtYPzdlDU+uc25YkOC7VKto=
 github.com/aaronland/go-sqlite v0.0.3 h1:pa8L74JdbkmONxqLqMqZFZtHpARHM46JmX1A/hZ44KU=
 github.com/aaronland/go-sqlite v0.0.3/go.mod h1:b/FfLh8xBZ1dhjyehPsFli46VhGqWAz2rKR4udvTHJw=
 github.com/aaronland/go-sqlite v0.0.5 h1:ak6Ee2AyXIcE+8ZInib2qy4k2NSDIQeZKiL9bEZW6S4=

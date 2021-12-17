@@ -9,9 +9,9 @@ import (
 	"github.com/whosonfirst/go-whosonfirst-spr/v2"
 )
 
-// QueryPaginated will iterate over all the rows for 'q' in batches determined by 'pg_opts' and return a `spr.StandardPlacesResults` and `pagination.Pagination`
+// QueryPaginated will iterate over all the rows for 'q' in batches determined by 'pg_opts' and return a `spr.StandardPlacesResults` and `pagination.Results`
 // instance for the results.
-func QueryPaginated(ctx context.Context, conn *sql.DB, pg_opts pagination.PaginationOptions, q string, args ...interface{}) (spr.StandardPlacesResults, pagination.Pagination, error) {
+func QueryPaginated(ctx context.Context, conn *sql.DB, pg_opts pagination.Options, q string, args ...interface{}) (spr.StandardPlacesResults, pagination.Results, error) {
 
 	rsp, err := sql_pagination.QueryPaginated(conn, pg_opts, q, args...)
 
@@ -20,7 +20,7 @@ func QueryPaginated(ctx context.Context, conn *sql.DB, pg_opts pagination.Pagina
 	}
 
 	rows := rsp.Rows()
-	pg := rsp.Pagination()
+	pg := rsp.Results()
 
 	spr_results := make([]spr.StandardPlacesResult, 0)
 

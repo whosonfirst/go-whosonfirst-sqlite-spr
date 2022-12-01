@@ -23,14 +23,14 @@ For example:
 ```
 import (
         "context"
-	"github.com/aaronland/go-sqlite/database"
-	"github.com/whosonfirst/go-whosonfirst-sqlite-features/tables"
-	"github.com/whosonfirst/go-whosonfirst-sqlite-spr"
+	"github.com/aaronland/go-sqlite/v2"
+	"github.com/whosonfirst/go-whosonfirst-sqlite-features/v2/tables"
+	"github.com/whosonfirst/go-whosonfirst-sqlite-spr/v2"
 )
 
 ctx := context.Background()
 
-db, _ := wof_database.NewDB("example.db")
+db, _ := sqlite.NewDatabase(ctx, "modernc://cwd/test.db")
 spr_table, _ := tables.NewSPRTableWithDatabase(db)
 
 id := 1234

@@ -1,11 +1,11 @@
-module github.com/whosonfirst/go-whosonfirst-sqlite-spr
+module github.com/whosonfirst/go-whosonfirst-sqlite-spr/v2
 
 go 1.18
 
 require (
 	github.com/aaronland/go-pagination v0.2.0
 	github.com/aaronland/go-pagination-sql v0.2.0
-	github.com/aaronland/go-sqlite v0.2.2
+	github.com/aaronland/go-sqlite/v2 v2.2.0
 	github.com/sfomuseum/go-edtf v1.1.1
 	github.com/whosonfirst/go-whosonfirst-flags v0.4.4
 	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.3
@@ -13,8 +13,8 @@ require (
 )
 
 require (
+	github.com/aaronland/go-roster v1.0.0 // indirect
 	github.com/jtacoma/uritemplates v1.0.0 // indirect
-	github.com/mattn/go-sqlite3 v1.14.16 // indirect
 	github.com/paulmach/orb v0.7.1 // indirect
 	github.com/tidwall/gjson v1.14.1 // indirect
 	github.com/tidwall/match v1.1.1 // indirect

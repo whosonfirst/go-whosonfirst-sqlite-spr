@@ -23,14 +23,17 @@ For example:
 ```
 import (
         "context"
-	"github.com/aaronland/go-sqlite/v2"
-	"github.com/whosonfirst/go-whosonfirst-sqlite-features/v2/tables"
+	"database/sql"
+	
+	_ "github.com/mattn/go-sqlite3"
+	
+	"github.com/whosonfirst/go-whosonfirst-database/sql/tables"
 	"github.com/whosonfirst/go-whosonfirst-sqlite-spr/v2"
 )
 
 ctx := context.Background()
 
-db, _ := sqlite.NewDatabase(ctx, "modernc://cwd/test.db")
+db, _ := sql.Open("sqlite3", "test.db")
 spr_table, _ := tables.NewSPRTableWithDatabase(db)
 
 id := 1234
@@ -70,6 +73,5 @@ type SQLiteStandardPlacesResult struct {
 
 ## See also
 
-* https://github.com/aaronland/go-sqlite
 * https://github.com/whosonfirst/go-whosonfirst-spr
-* https://github.com/whosonfirst/go-whosonfirst-sqlite-features
+* https://github.com/whosonfirst/go-whosonfirst-database

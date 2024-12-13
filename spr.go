@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	_ "log"
 	"strconv"
 	"strings"
 

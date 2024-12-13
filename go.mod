@@ -5,7 +5,7 @@ go 1.23.3
 require (
 	github.com/aaronland/go-pagination v0.3.0
 	github.com/aaronland/go-pagination-sql v0.2.0
-	github.com/aaronland/go-sqlite/v2 v2.2.0
+	github.com/sfomuseum/go-database v0.0.7
 	github.com/sfomuseum/go-edtf v1.2.1
 	github.com/whosonfirst/go-whosonfirst-flags v0.5.2
 	github.com/whosonfirst/go-whosonfirst-spr/v2 v2.3.7
@@ -13,7 +13,6 @@ require (
 )
 
 require (
-	github.com/aaronland/go-roster v1.0.0 // indirect
 	github.com/jtacoma/uritemplates v1.0.0 // indirect
 	github.com/paulmach/orb v0.10.0 // indirect
 	github.com/tidwall/gjson v1.17.0 // indirect
